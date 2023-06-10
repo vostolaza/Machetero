@@ -1,10 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import Scorecard from "./src/components/Scorecard";
+import StartForm from "./src/components/StartForm";
 
 export default function App() {
+  const [formData, setFormData] = useState(null);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {formData ? (
+        <Scorecard numPlayers={formData.numPlayers} club={formData.club} />
+      ) : (
+        <StartForm onSubmit={setFormData} />
+      )}
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +22,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
